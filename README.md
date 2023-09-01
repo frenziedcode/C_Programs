@@ -10,4 +10,4 @@ One of the distinctive features of this project is its integration with a high-p
 This software is highly effective for managing libraries, both personal and institutional. With OFF Library, you can not only catalogue your book collection, but also add personal notes, assign ratings, all in an intuitive and user-friendly user interface.
 
 ## Install
-`cc main.c | exec`
+`cc -o OFFLibrary main.c | ./OFFLibrary`
