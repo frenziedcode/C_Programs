@@ -1,4 +1,4 @@
-# 📚 OFF_Library
+# 📚 OFF Library
 
 This program has been carefully developed with the primary purpose of storing and cataloguing comprehensive information about books, going far beyond simply listing titles.
 
