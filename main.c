@@ -1,6 +1,6 @@
 //
 //	OFF LIBRARY
-//	v.1.0.0
+//	v.1.0.3
 //	@frenziedcode
 //
 
@@ -23,12 +23,11 @@ struct Library
 
 int menuHome (int *selectOption)
 {
-	printf("\n\n");
-	printf("📚 OFF LIBRARY"); printf("\e[2m v.1.0.2 \e[0m"); //Exec Header
+	printf("\n");
+	printf("📚 OFF LIBRARY"); printf("\e[2m v.1.0.3 \e[0m"); //Exec Header
 	printf("\n\n");
 
 	/*  --------------- */
-
 
 	printf("➤ MENU\n\n");
 	printf("1. [Add Book]\n");
@@ -49,23 +48,20 @@ void addBook()
 
 	printf("Book name: ");
 	fgets(newBook.bookName, 50, stdin);
-	puts(newBook.bookName);
 
 	printf("Author: ");
 	fgets(newBook.authorName, 50, stdin);
-	puts(newBook.authorName);
 
 	printf("Year of publication: ");
 	fgets(newBook.publicationDate, 5, stdin);
-	puts(newBook.publicationDate);
-
+	
+	getchar();
 
 	FILE *file = fopen("books.txt", "a"); //Create books.txt
 	if (file != NULL)
 	{
-		fprintf(file, "%s%s%s\n", newBook.bookName, newBook.authorName,newBook.publicationDate);
+		fprintf(file, "%s|%s|%s\n", newBook.bookName, newBook.authorName,newBook.publicationDate);
 		fclose(file);
-		printf("\n\n");
 		printf("The book has been added\n");
 
 	} 
@@ -77,25 +73,26 @@ void addBook()
 
 void listBook()
 {
-	printf("\n");
+    printf("\n");
 
-	FILE *file = fopen("books.txt", "r");
-	if (file != NULL)
-	{
-		struct Library library;
+    FILE *file = fopen("books.txt", "r");
+    if (file != NULL)
+    {
+        struct Library library;
 
-		while(fscanf(file,"%s", library.bookName) != EOF)
-		{
-			printf(" Nome: %s\n Author: %s\n Publication: %s\n\n ", library.bookName, library.authorName, library.publicationDate);
-			printf("-----------------------------------\n");
-		}
+        while (fscanf(file, "%49[^|]|%49[^|]|%4[^\n]\n", library.bookName, library.authorName, library.publicationDate) != EOF)
+        {
+        	printf("\n");
+            printf(" Book: %s Author: %s Publication: %s\n\n", library.bookName, library.authorName, library.publicationDate);
+            printf("-----------------------------------\n");
+        }
 
-		fclose(file);
-	}
-	if (file == NULL)
-	{
-		printf("There are no books on your shelf\n");
-	}
+        fclose(file);
+    }
+    else
+    {
+        printf("There are no books on your shelf\n");
+    }
 }
 
 
@@ -105,35 +102,45 @@ void listBook()
 int main() 
 {
 
+
 	int selectOption;
 
+			/*
+
+			printf("\n\n");
+			printf("➤ ADD BOOK\n\n");
+			addBook();
+
+			*/
+	
 	while(!EXIT_FLAG)
 	{
 		menuHome(&selectOption);
 
 		if (selectOption == 1)
 		{
-			printf("\n\n");
+			printf("\n");
 			printf("➤ ADD BOOK\n\n");
 			addBook();	
 
 		}
-		else if (selectOption == 2)
+		 if (selectOption == 2)
 		{
-			printf("\n\n");
-			printf("LIST OF BOOKS\n");
+			printf("\n");
+			printf("➤ LIST OF BOOKS\n");
 			listBook();
 		}
-		else if ( selectOption == 3)
+		 if ( selectOption == 3)
 		{
 			printf("Closing program...\n\n");
 			exit(0);
 		}
-		else  if (selectOption == 4)
+		if (selectOption == 4)
 			EXIT_FLAG = 1;
 
 	}
 
+			printf("--------------------------------------------------\n");
 	return 0;
 }
 
